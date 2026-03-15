@@ -1,9 +1,22 @@
 <!DOCTYPE html>
 <html lang="ru" class="light">
 <head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <meta charset="UTF-8">
+    <script>
+    (function() {
+        const saved = localStorage.getItem('accentColor') || '#0071e3';
+        const savedHover = localStorage.getItem('accentHover') || '#0077ed';
+        const savedGlow = localStorage.getItem('accentGlow') || 'rgba(0, 113, 227, 0.4)';
+        const savedGlowSoft = localStorage.getItem('accentGlowSoft') || 'rgba(0, 113, 227, 0.15)';
+        
+        document.documentElement.style.setProperty('--accent', saved);
+        document.documentElement.style.setProperty('--accent-hover', savedHover);
+        document.documentElement.style.setProperty('--accent-glow', savedGlow);
+        document.documentElement.style.setProperty('--accent-glow-soft', savedGlowSoft);
+    })();
+</script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#0071e3">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -26,21 +39,19 @@
         }
         
         :root {
-            --bg-primary: #f0f0f5;
-            --bg-secondary: rgba(255, 255, 255, 0.8);
-            --bg-glass: rgba(255, 255, 255, 0.6);
-            --text-primary: #1a1a1f;
-            --text-secondary: #5a5a6e;
-            --accent: #0071e3;
-            --accent-hover: #0077ed;
-            --border: rgba(0, 0, 0, 0.1);
-            --shadow: rgba(0, 0, 0, 0.08);
-            --glass-blur: blur(20px);
-            --card-bg: rgba(255, 255, 255, 0.9);
-            --hover-bg: rgba(255, 255, 255, 1);
-            --button-bg: #ffffff;
-            --button-border: rgba(0, 0, 0, 0.15);
-        }
+	    --bg-primary: #f0f0f5;
+	    --bg-secondary: rgba(255, 255, 255, 0.8);
+	    --bg-glass: rgba(255, 255, 255, 0.6);
+	    --text-primary: #1a1a1f;
+	    --text-secondary: #5a5a6e;
+	    --border: rgba(0, 0, 0, 0.1);
+	    --shadow: rgba(0, 0, 0, 0.08);
+	    --glass-blur: blur(20px);
+	    --card-bg: rgba(255, 255, 255, 0.9);
+	    --hover-bg: rgba(255, 255, 255, 1);
+	    --button-bg: #ffffff;
+	    --button-border: rgba(0, 0, 0, 0.15);
+	}
         
         [data-theme="dark"] {
             --bg-primary: #0d0d0d;
@@ -141,7 +152,7 @@
             align-items: center;
             gap: 12px;
             padding: 0 24px 40px;
-            font-size: 26px;
+            font-size: 36px;
             font-weight: 800;
             letter-spacing: -0.5px;
             animation: slideInLeft 0.6s ease;
@@ -152,24 +163,24 @@
             to { opacity: 1; transform: translateX(0); }
         }
         
-        .logo-icon {
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, var(--accent), #5856d6);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 800;
-            box-shadow: 0 4px 20px rgba(0, 113, 227, 0.4);
-            animation: pulse 2s infinite;
-        }
+	        .logo-icon {
+	    width: 44px;
+	    height: 44px;
+	    background: var(--accent);
+	    border-radius: 14px;
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	    color: white;
+	    font-weight: 800;
+	    box-shadow: 0 4px 20px var(--accent-glow);
+	    animation: pulse 2s infinite;
+	}
         
         @keyframes pulse {
-            0%, 100% { box-shadow: 0 4px 20px rgba(0, 113, 227, 0.4); }
-            50% { box-shadow: 0 4px 30px rgba(0, 113, 227, 0.6); }
-        }
+	    0%, 100% { box-shadow: 0 4px 20px var(--accent-glow); }
+	    50% { box-shadow: 0 4px 30px var(--accent-glow); }
+	}
         
         .nav-section {
             padding: 0 16px;
@@ -197,7 +208,7 @@
             gap: 14px;
             padding: 12px 14px;
             margin: 4px 0;
-            border-radius: 14px;
+            border-radius: 999px;
             cursor: pointer;
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             font-size: 14px;
@@ -218,7 +229,7 @@
             background: var(--accent);
             color: white;
             border-color: var(--accent);
-            box-shadow: 0 4px 15px rgba(0, 113, 227, 0.3);
+            box-shadow: 0 4px 15px var(--accent-glow);
             transform: scale(1.02);
         }
         
@@ -387,7 +398,7 @@
             cursor: pointer;
             font-size: 14px;
             border: 2px solid var(--button-bg);
-            box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3);
+            box-shadow: 0 4px 12px var(--accent-glow);
             transition: all 0.3s ease;
         }
         
@@ -516,16 +527,16 @@
         }
         
         .app-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.5), transparent);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
+	    content: '';
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    right: 0;
+	    bottom: 0;
+	    background: linear-gradient(135deg, var(--card-accent, rgba(255,255,255,0.3)), transparent);
+	    opacity: 0;
+	    transition: opacity 0.4s ease;
+	}
         
         .app-card:hover {
             transform: translateY(-8px) scale(1.02);
@@ -722,7 +733,7 @@
         
         .btn {
             padding: 16px 40px;
-            border-radius: 24px;
+            border-radius: 50px;
             border: none;
             font-size: 16px;
             font-weight: 700;
@@ -735,16 +746,16 @@
         }
         
         .btn-primary {
-            background: var(--accent);
-            color: white;
-            box-shadow: 0 4px 20px rgba(0, 113, 227, 0.4);
-        }
-        
+	    background: var(--accent);
+	    color: white;
+	    box-shadow: 0 4px 20px var(--accent-glow);
+	}
+		        
         .btn-primary:hover {
-            background: var(--accent-hover);
-            transform: scale(1.05);
-            box-shadow: 0 8px 30px rgba(0, 113, 227, 0.5);
-        }
+	    background: var(--accent-hover);
+	    transform: scale(1.05);
+	    box-shadow: 0 8px 30px var(--accent-glow);
+	}
         
         .btn-secondary {
             background: var(--button-bg);
@@ -816,13 +827,13 @@
         }
         
         .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent), #5856d6);
-            border-radius: 4px;
-            transition: width 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
+	    height: 100%;
+	    background: var(--accent);
+	    border-radius: 4px;
+	    transition: width 0.4s ease;
+	    position: relative;
+	    overflow: hidden;
+	}
         
         .progress-fill::after {
             content: '';
@@ -1048,7 +1059,7 @@
             padding: 10px 20px;
             background: var(--button-bg);
             border: 2px solid var(--button-border);
-            border-radius: 24px;
+            border-radius: 999px !important;
             font-size: 14px;
             font-weight: 600;
             color: var(--text-secondary);
@@ -1068,7 +1079,7 @@
             background: var(--accent);
             color: white;
             border-color: var(--accent);
-            box-shadow: 0 4px 16px rgba(0, 113, 227, 0.3);
+            box-shadow: 0 4px 16px var(--accent-glow)
         }
         
         @media (max-width: 1024px) {
@@ -1106,6 +1117,7 @@
     position: relative;
     overflow: hidden;
     margin: -32px -32px 0 -32px;
+    transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .app-hero-banner img {
@@ -1113,6 +1125,36 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
+    opacity: 0;
+    transform: scale(1.1);
+}
+
+.app-hero-banner img.loaded {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.app-hero-banner:hover img.loaded {
+    transform: scale(1.05);
+}
+
+/* Градиент сверху для читаемости текста */
+.hero-gradient-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        transparent 50%,           /* ← было 30%, теперь 50% — прозрачная часть длиннее */
+        rgba(13, 13, 13, 0.2) 75%,  /* ← добавлен промежуточный мягкий переход */
+        var(--bg-primary) 100%
+    );
+    pointer-events: none;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Fallback градиент на случай если нет баннера */
@@ -1151,6 +1193,7 @@
 
 .screenshots-section-modern {
     margin-bottom: 32px;
+    margin-left: 41px;  /* ← ДОБАВЬ ЭТО */
 }
 
 .screenshots-section-modern h3 {
@@ -1290,7 +1333,8 @@
 .detail-icon-modern img {
     width: 60%;
     height: 60%;
-    object-fit: cover;
+    object-fit: contain;  /* ← ИСПРАВЛЕНО: cover → contain */
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
 }
 
 .detail-info-modern {
@@ -1342,7 +1386,7 @@
 
 .action-buttons-modern .btn {
     padding: 14px 32px;
-    border-radius: 8px;
+    border-radius: 50px;
     font-size: 15px;
 }
 
@@ -1352,6 +1396,7 @@
     border-radius: 16px;
     padding: 28px;
     margin-bottom: 32px;
+    margin-left: 41px;  /* ← ДОБАВЬ ЭТО */
 }
 
 .description-section-modern h3 {
@@ -1463,7 +1508,9 @@
 }
 
 .settings-content {
-    background: var(--card-bg);
+    background: var(--bg-glass);
+    backdrop-filter: blur(20px);  
+    -webkit-backdrop-filter: blur(20px);
     border: 2px solid var(--border);
     border-radius: 24px;
     width: 400px;
@@ -1481,8 +1528,9 @@
 .settings-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;  /* ← было center, станет flex-end */
     margin-bottom: 24px;
+    min-height: 60px;       /* ← добавь фиксированную высоту */
 }
 
 .settings-header h2 {
@@ -1491,18 +1539,19 @@
 }
 
 .close-btn {
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     border: 2px solid var(--button-border);
     background: var(--button-bg);
     color: var(--text-primary);
-    font-size: 20px;
+    font-size: 24px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
+    margin-top: -5px;
 }
 
 .close-btn:hover {
@@ -1547,10 +1596,34 @@
     transition: background 0.3s ease;
 }
 
+/* Активный переключатель темы использует accent */
 .toggle-switch.active {
     background: var(--accent);
 }
 
+/* Hover эффекты в настройках */
+.setting-item:hover {
+    border-color: var(--accent);
+}
+
+/* Фокус на инпутах */
+.search-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-glow-soft), 0 4px 16px var(--shadow);
+}
+
+/* Все кнопки primary */
+.btn-primary {
+    background: var(--accent);
+    box-shadow: 0 4px 20px var(--accent-glow);;
+}
+
+/* Hover для primary */
+.btn-primary:hover {
+    background: var(--accent-hover);
+}
+
+/* Но сначала определи --accent-hover динамически */
 .toggle-knob {
     width: 24px;
     height: 24px;
@@ -1598,7 +1671,7 @@
 }
 
 .user-avatar.logged-in {
-    background: linear-gradient(135deg, var(--accent), #5856d6);
+    background: var(--accent);
     color: white;
     border: 2px solid transparent;
 }
@@ -1607,6 +1680,77 @@
     display: none;
 }
 
+
+.color-picker {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 8px 0;
+}
+
+.color-option {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.color-option:hover {
+    transform: scale(1.15);
+}
+
+.color-option.active {
+    border-color: var(--text-primary);
+    transform: scale(1.1);
+}
+
+.color-option.active::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: var(--bg-glass);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.setting-item:hover {
+    background: var(--hover-bg);
+    border-color: var(--accent);
+}
+
+/* Активный переключатель использует accent */
+.toggle-switch.active {
+    background: var(--accent);
+}
+
+/* Метка режима */
+#siteModeLabel {
+    transition: all 0.3s ease;
+}
+
+#siteModeLabel.external {
+    color: var(--accent);
+    font-weight: 600;
+}
     </style>
 </head>
 <body>
@@ -1618,10 +1762,10 @@
     
     <div class="app-container">
         <aside class="sidebar">
-            <div class="logo">
-                <div class="logo-icon">W</div>
-                <span>WinStore</span>
-            </div>
+	            <!-- Логотип убран -->
+	<div class="logo" onclick="showHome()" style="padding: 24px 24px 40px; cursor: pointer;">
+    <span>WinStore</span>
+	</div>
             
             <div class="nav-section">
                 <div class="nav-title">Обзор</div>
@@ -1643,6 +1787,12 @@
                 <div class="nav-item" onclick="showCategory('development')" data-section="development">
                     <span>Разработка</span>
                 </div>
+		<div class="nav-item" onclick="showCategory('ai')" data-section="ai">
+		    <span>Нейросети</span>
+		</div>
+		<div class="nav-item" onclick="showCategory('websites')" data-section="websites">
+		    <span>Сайты</span>
+		</div>
             </div>
             
             <div class="nav-section" style="margin-top: 24px;">
@@ -1754,9 +1904,9 @@
                                 </div>
                                 
                                 <div class="action-buttons-modern">
-                                    <button class="btn btn-primary" id="downloadBtn" onclick="startDownload()">Скачать</button>
-                                    <button class="btn btn-secondary" id="openBtn" style="display: none;" onclick="openApp()">Открыть</button>
-                                    <button class="btn btn-danger" id="deleteBtn" style="display: none;" onclick="deleteApp()">Удалить</button>
+                                      <button class="btn btn-primary" id="downloadBtn" onclick="startDownloadAndInstall()">Скачать и установить</button>
+                                      <button class="btn btn-primary" id="openBtn" style="display: none;">Открыть</button>
+                                      <button class="btn btn-danger" id="deleteBtn" style="display: none;" onclick="deleteInstaller()">Удалить установщик</button>
                                 </div>
                                 
                                 <div class="download-container" id="downloadContainer">
@@ -1823,7 +1973,7 @@
                 color: "#FFFFFF", 
                 iconUrl: "https://chrome.vicsoftware.net/img/logo.svg",
 		screenshots: ["https://www.google.com/chrome/static/images/intl/ru_RU/homepage/fast/tabs-groups_desktop.webp", "https://www.google.com/chrome/static/images/intl/ru_RU/homepage/fast/devices_desktop.webp", "https://www.google.com/chrome/static/images/intl/ru_RU/homepage/fast/update_desktop.webp"],
-		bannerUrl: "https://help.youtube.com/chrome/static/images/v2/by-google/resources/resources-02-2x.webp",
+		bannerUrl: "https://cdn.halktv.com.tr/other/2023/10/13/google-chrome-en-can-sikici-sorunu-cozuldu.jpg",
                 fileName: "ChromeSetup.exe",
                 desc: "Бесплатный редактор исходного кода и замена Notepad, поддерживает несколько языков программирования.",
                 installed: false 
@@ -1838,11 +1988,11 @@
                 size: "40 MB", 
                 icon: "RB", 
                 color: "#335FFF", 
-                iconUrl: "https://logodix.com/logo/1012140.png",
+                iconUrl: "https://static.wikia.nocookie.net/logopedia/images/d/d4/Roblox_2018_O_Icon_final_-_White.svg/revision/latest?cb=20190809191240",
 		bannerUrl: "https://store-images.s-microsoft.com/image/apps.29998.14294982842551334.b7187202-d3a5-4d28-b184-10f299fc8103.a7840b5a-b8db-4d9b-8126-53f6f7182272?h=720",
 		screenshots: ["https://store-images.s-microsoft.com/image/apps.35905.14294982842551334.f9ecf2d7-667c-402f-8050-72b6fa0a48ec.dd62c04a-1bb9-459c-9e79-35b0424d9c5f?h=253", "https://store-images.s-microsoft.com/image/apps.62363.14294982842551334.d1d16940-c8f3-47ac-b100-4a7c65ccefc7.1cae350d-00f6-4f7c-83e9-f382570f4d1b?h=253", "https://store-images.s-microsoft.com/image/apps.49109.14294982842551334.f9ecf2d7-667c-402f-8050-72b6fa0a48ec.b1ba2a21-d064-4a44-9627-2f2e4a058549?h=253"],
                 fileName: "RobloxPlayerInstaller-BK3QCMTHK3.exe",
-                desc: "ввв",
+                desc: "Roblox is the ultimate virtual universe that lets you create, share experiences with friends, and connect with the community.",
                 installed: false 
             },
             { 
@@ -1888,7 +2038,7 @@
                 color: "#FFFFFF", 
                 iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg",
 		screenshots: ["https://images-eds-ssl.xboxlive.com/image?url=4rt9.lXDC4H_93laV1_eHHFT949fUipzkiFOBH3fAiZZUCdYojwUyX2aTonS1aIwMrx6NUIsHfUHSLzjGJFxxj7kCzMIlSC20SNjaJf9GmGwFpOvN9kNpptXE4l4MDZMOqBSboNhU4Jf6wYJB7tbuiEJ.C80bQ8RYViVPRbu5uE-&format=source&h=253"],
-		bannerUrl: "https://user-images.githubusercontent.com/26040158/43990267-ac1a929e-9d94-11e8-8df4-41e749c27d2c.png",
+		bannerUrl: "https://cs1.htmlacademy.ru/content/blog/1035/material@2x.png",
                 fileName: "VSCodeUserSetup-x64-1.109.3.exe",
                 desc: "Легкий но мощный редактор кода с поддержкой отладки, Git и расширений.",
                 installed: false 
@@ -1907,7 +2057,7 @@
 		bannerUrl: "https://clan.fastly.steamstatic.com/images/4145017/8baf3567406237172f77d95dac362139e0d3738d.jpg",
                 fileName: "SteamSetup.exe",
                 desc: "Платформа для покупки, загрузки и игры в тысячи игр. Крупнейший игровой сервис.",
-                installed: true 
+                installed: false 
             },
             { 
                 id: 7, 
@@ -1973,22 +2123,6 @@ screenshots: ["https://store-images.s-microsoft.com/image/apps.33483.14473651905
                 installed: false 
             },
             { 
-                id: 11, 
-                name: "YouTube", 
-                developer: "Google LCC", 
-                category: "entertainment", 
-                rating: 4.9, 
-                downloads: "5M+", 
-                size: "130 MB", 
-                icon: "YT", 
-                color: "#FFFFFF", 
-                iconUrl: "https://logo-teka.com/wp-content/uploads/2025/06/youtube-icon-logo.svg",
-		bannerUrl: "https://static.vecteezy.com/system/resources/previews/028/148/802/non_2x/madrid-spain-august-2023-social-media-logo-on-black-wall-background-with-hard-shadow-and-space-for-text-and-graphics-free-photo.jpg",
-                fileName: "OBS-Studio-30.0.2-Full-Installer-x64.exe",
-                desc: "Бесплатное ПО для записи экрана и стриминга с открытым исходным кодом.",
-                installed: false 
-            },
-            { 
                 id: 12, 
                 name: "Epic Games Launcher", 
                 developer: "Epic Games", 
@@ -2031,7 +2165,7 @@ screenshots: ["https://store-images.s-microsoft.com/image/apps.33483.14473651905
                 icon: "E", 
                 color: "#7D97FF", 
                 iconUrl: "https://easylauncher.org/themes/easylauncher/assets/images/services/EasyLauncher.svg",
-		screenshots: ["https://store-images.s-microsoft.com/image/apps.63804.14492077886571533.28b7d282-6a14-44b0-bed0-cecfc2543cea.38a3002f-7d5e-447b-887d-d25be07416d9?q=90&w=320&h=180", "https://store-images.s-microsoft.com/image/apps.26021.14492077886571533.be42f4bd-887b-4430-8ed0-622341b4d2b0.5c128930-e363-462f-8e67-ae3ca9b520d5?q=90&w=320&h=180", "https://store-images.s-microsoft.com/image/apps.47244.14492077886571533.be42f4bd-887b-4430-8ed0-622341b4d2b0.1307c24a-a2fb-4cb4-9fb8-d1e81ebf75d0?q=90&w=320&h=180"],
+		screenshots: ["https://easylauncher.org/themes/easylauncher/assets/lottie/features/feature-fast-preview-1x.webp", "https://store-images.s-microsoft.com/image/apps.26021.14492077886571533.be42f4bd-887b-4430-8ed0-622341b4d2b0.5c128930-e363-462f-8e67-ae3ca9b520d5?q=90&w=320&h=180", "https://store-images.s-microsoft.com/image/apps.47244.14492077886571533.be42f4bd-887b-4430-8ed0-622341b4d2b0.1307c24a-a2fb-4cb4-9fb8-d1e81ebf75d0?q=90&w=320&h=180"],
 		bannerUrl: "https://easylauncher.org/themes/easylauncher/assets/images/slides/slider_launcher-accounts-skin_dark_1x.webp",
                 fileName: "EasyLauncher-Installer-3.0.1.exe",
                 desc: "Играйте в майнркафт с помощью Easy Launcher",
@@ -2048,7 +2182,7 @@ screenshots: ["https://store-images.s-microsoft.com/image/apps.33483.14473651905
                 icon: "TL", 
                 color: "#1A465E", 
                 iconUrl: "https://img.utdstc.com/icon/fe4/1ad/fe41add5ac1555ccb3896fb52328ec3d81bb91b62fb4fb8a0ca3aca3740e76d3:100",
-		screenshots: ["https://store-images.s-microsoft.com/image/apps.18976.14492077886571533.28b7d282-6a14-44b0-bed0-cecfc2543cea.b9ba10b2-7eca-47d2-a5f1-42b2c88a7dd8?q=90&w=320&h=180", "https://store-images.s-microsoft.com/image/apps.60182.14492077886571533.be42f4bd-887b-4430-8ed0-622341b4d2b0.14a70815-3a7c-46a6-b1ae-b67c9304175e?q=90&w=320&h=180", "https://store-images.s-microsoft.com/image/apps.53164.14492077886571533.be42f4bd-887b-4430-8ed0-622341b4d2b0.28ba713d-913d-4097-a3a7-a3d065f2bccf?q=90&w=320&h=180"],
+		screenshots: ["https://tlauncher.ru/assets/images/front_page/settings_versions_2_0_v1.png", "https://store-images.s-microsoft.com/image/apps.60182.14492077886571533.be42f4bd-887b-4430-8ed0-622341b4d2b0.14a70815-3a7c-46a6-b1ae-b67c9304175e?q=90&w=320&h=180", "https://store-images.s-microsoft.com/image/apps.53164.14492077886571533.be42f4bd-887b-4430-8ed0-622341b4d2b0.28ba713d-913d-4097-a3a7-a3d065f2bccf?q=90&w=320&h=180"],
                 fileName: "Intaller-1.9.5.6.exe",
                 desc: "Играйте в майнркафт с помощью TLauncher",
                 installed: false 
@@ -2116,8 +2250,348 @@ screenshots: ["https://store-images.s-microsoft.com/image/apps.33483.14473651905
                 fileName: "AnyDesk.Soft.set.downup.exe",
                 desc: "Воспроизводите звуки в голосовых чатах. Попробуйте прямо сейчас!",
                 installed: false 
-            }	
+            },
+{ 
+    id: 20, 
+    name: "ChatGPT", 
+    developer: "OpenAI", 
+    category: "ai", 
+    rating: 4.9, 
+    downloads: "100M+", 
+    size: "Веб", 
+    icon: "GPT", 
+    iconUrl: "https://logo-teka.com/wp-content/uploads/2025/06/chatgpt-sign-logo.svg",
+    color: "#FFFFFF", 
+    isWeb: true,
+    webUrl: "https://chat.openai.com",
+    desc: "ИИ-ассистент для общения и работы.",
+    installed: false 
+},
+{ 
+    id: 21, 
+    name: "Claude", 
+    developer: "Anthropic", 
+    category: "ai", 
+    rating: 4.8, 
+    downloads: "10M+", 
+    size: "Веб", 
+    icon: "Cl",
+    iconUrl: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNTYiIGhlaWdodD0iMjU3IiB2aWV3Qm94PSIwIDAgMjU2IDI1NyIgPjxwYXRoIGZpbGw9IiNEOTc3NTciIGQ9Im01MC4yMjggMTcwLjMyMWw1MC4zNTctMjguMjU3bC44NDMtMi40NjNsLS44NDMtMS4zNjFoLTIuNDYybC04LjQyNi0uNTE4bC0yOC43NzUtLjc3OGwtMjQuOTUyLTEuMDM3bC0yNC4xNzUtMS4yOTZsLTYuMDkyLTEuMjk3TDAgMTI1Ljc5NmwuNTgzLTMuNzU5bDUuMTItMy40MzRsNy4zMjQuNjQ4bDE2LjIwMiAxLjEwMWwyNC4zMDQgMS42ODVsMTcuNjI5IDEuMDM3bDI2LjExOCAyLjcyMmg0LjE0OGwuNTgzLTEuNjg1bC0xLjQyNi0xLjAzN2wtMS4xMDEtMS4wMzdsLTI1LjE0Ny0xNy4wNDVsLTI3LjIyLTE4LjAxN2wtMTQuMjU4LTEwLjM3bC03LjcxMy01LjI1bC0zLjg4OC00LjkyNWwtMS42ODUtMTAuNzU4bDctNy43MTNsOS4zOTcuNjQ5bDIuMzk4LjY0OGw5LjUyNyA3LjMyM2wyMC4zNSAxNS43NUw5NC44MTcgOTEuOWwzLjg4OSAzLjI0bDEuNTU1LTEuMTAybC4xOTUtLjc3N2wtMS43NS0yLjkxN2wtMTQuNDUzLTI2LjExOGwtMTUuNDI1LTI2LjU3MmwtNi44Ny0xMS4wMThsLTEuODE0LTYuNjFjLS42NDgtMi43MjMtMS4xMDItNC45OTEtMS4xMDItNy43NzhsNy45NzItMTAuODIzTDcxLjQyIDBsMTAuNjMgMS40MjZsNC40NzIgMy44ODhsNi42MSAxNS4xMDFsMTAuNjk0IDIzLjc4NmwxNi41OTEgMzIuMzRsNC44NjEgOS41OTJsMi41OTIgOC44NzlsLjk3MyAyLjcyMmgxLjY4NXYtMS41NTZsMS4zNi0xOC4yMTFsMi41MjgtMjIuMzZsMi40NjMtMjguNzc2bC44NDMtOC4xbDQuMDE4LTkuNzIybDcuOTcxLTUuMjVsNi4yMjIgMi45ODFsNS4xMiA3LjMyNGwtLjcxMyA0LjczbC0zLjA0NiAxOS43NjhsLTUuOTYyIDMwLjk4bC0zLjg4OSAyMC43MzloMi4yNjhsMi41OTMtMi41OTNsMTAuNDk5LTEzLjkzNGwxNy42MjgtMjIuMDM2bDcuNzc4LTguNzQ5bDkuMDczLTkuNjU3bDUuODMzLTQuNjAxaDExLjAxOGw4LjEgMTIuMDU1bC0zLjYyOCAxMi40NDNsLTExLjM0MiAxNC4zODhsLTkuMzk4IDEyLjE4NGwtMTMuNDggMTguMTQ3bC04LjQyNiAxNC41MThsLjc3OCAxLjE2NmwyLjAxLS4xOTRsMzAuNDYtNi40ODFsMTYuNDYyLTIuOTgybDE5LjYzNy0zLjM3bDguODggNC4xNDhsLjk3MSA0LjIxM2wtMy41IDguNjJsLTIwLjk5OCA1LjE4NGwtMjQuNjI4IDQuOTI2bC0zNi42ODIgOC42ODVsLS40NTQuMzI0bC41MTkuNjQ4bDE2LjUyNiAxLjU1NWw3LjA2NS4zODloMTcuMzA0bDMyLjIxIDIuMzk4bDguNDI2IDUuNTc0bDUuMDU1IDYuODA1bC0uODQzIDUuMTg0bC0xMi45NjIgNi42MTFsLTE3LjQ5OC00LjE0OGwtNDAuODMtOS43MjFsLTE0LTMuNWgtMS45NDR2MS4xNjdsMTEuNjY2IDExLjQwNmwyMS4zODcgMTkuMzE0bDI2Ljc2NyAyNC44ODdsMS4zNiA2LjE1N2wtMy40MzQgNC44NmwtMy42My0uNTE4bC0yMy41MjYtMTcuNjkzbC05LjA3My03Ljk3MmwtMjAuNTQ1LTE3LjMwNGgtMS4zNnYxLjgxNGw0LjczIDYuOTM1bDI1LjAxNyAzNy41OWwxLjI5NiAxMS41MzZsLTEuODE0IDMuNzZsLTYuNDgxIDIuMjY4bC03LjEzLTEuMjk3bC0xNC42NDctMjAuNTQ0bC0xNS4xLTIzLjEzOGwtMTIuMTg1LTIwLjczOWwtMS40OS44NDNsLTcuMTk0IDc3LjQ0OGwtMy4zNyAzLjk1M2wtNy43NzggMi45ODFsLTYuNDgtNC45MjVsLTMuNDM2LTcuOTcybDMuNDM1LTE1Ljc0OWw0LjE0OC0yMC41NDRsMy4zNy0xNi4zMzNsMy4wNDYtMjAuMjg1bDEuODE1LTYuNzRsLS4xMy0uNDU0bC0xLjQ5LjE5NGwtMTUuMjk1IDIwLjk5OWwtMjMuMjY3IDMxLjQzM2wtMTguNDA2IDE5LjcwMmwtNC40MDcgMS43NWwtNy42NDgtMy45NTRsLjcxMy03LjA2NGw0LjI3Ny02LjI4NmwyNS40Ny0zMi40MDVsMTUuMzYtMjAuMDkybDkuOTE3LTExLjZsLS4wNjUtMS42ODZoLS41ODNMNDQuMDcgMTk4LjEyNWwtMTIuMDU1IDEuNTU1bC01LjE4NS00Ljg2bC42NDgtNy45NzJsMi40NjMtMi41OTNsMjAuMzUtMTMuOTk5eiIvPjwvc3ZnPg==", 
+    color: "#FFFFFF", 
+    isWeb: true,
+    webUrl: "https://claude.ai",
+    desc: "Умный ИИ-помощник для сложных задач.",
+    installed: false 
+},
+{ 
+    id: 22, 
+    name: "YouTube", 
+    developer: "Google", 
+    category: "websites", 
+    rating: 4.9, 
+    downloads: "2B+", 
+    size: "Веб", 
+    icon: "YT",
+    iconUrl: "https://logo-teka.com/wp-content/uploads/2025/06/youtube-icon-logo.svg", 
+    color: "#FFFFFF", 
+    isWeb: true,
+    webUrl: "https://youtube.com",
+    desc: "Видеохостинг с миллиардами видео.",
+    installed: false 
+},
+{ 
+    id: 23, 
+    name: "Twitch", 
+    developer: "Amazon", 
+    category: "websites", 
+    rating: 4.5, 
+    downloads: "100M+", 
+    size: "Веб", 
+    icon: "Tw",
+    iconUrl: "https://logo-teka.com/wp-content/uploads/2025/06/twitch-sign-logo.svg", 
+    color: "#FFFFFF", 
+    isWeb: true,
+    webUrl: "https://twitch.tv",
+    desc: "Платформа для стриминга игр.",
+    installed: false 
+},
+{ 
+    id: 24, 
+    name: "TikTok", 
+    developer: "ByteDance", 
+    category: "websites", 
+    rating: 4.7, 
+    downloads: "1B+", 
+    size: "Веб", 
+    icon: "TT",
+    iconUrl: "https://images.icon-icons.com/2429/PNG/512/tik_tok_logo_icon_147226.png", 
+    color: "#000000", 
+    isWeb: true,
+    webUrl: "https://tiktok.com",
+    desc: "Короткие видео и тренды.",
+    installed: false 
+},
+{ 
+    id: 26, 
+    name: "DeepSeek", 
+    developer: "DeepSeek", 
+    category: "ai", 
+    rating: 4.7, 
+    downloads: "1B+", 
+    size: "Веб", 
+    icon: "TT",
+    iconUrl: "https://a5144d73-dc0c-47e4-af19-6ec502e91db2.selstorage.ru/optimized/dark/preview/deepseek-color.webp", 
+    color: "#FFFFFF", 
+    isWeb: true,
+    webUrl: "https://chat.deepseek.com/",
+    desc: "Короткие видео и тренды.",
+    installed: false 
+},
+{ 
+    id: 28, 
+    name: "Gemini", 
+    developer: "Google", 
+    category: "ai", 
+    rating: 4.6, 
+    downloads: "100M+", 
+    size: "Веб", 
+    icon: "G",
+    iconUrl: "https://a5144d73-dc0c-47e4-af19-6ec502e91db2.selstorage.ru/optimized/dark/preview/gemini-color.webp", 
+    color: "#FFFFFF", 
+    isWeb: true,
+    webUrl: "https://gemini.google.com",
+    desc: "Google ИИ для поиска и творчества.",
+    installed: false 
+},
+{ 
+    id: 29, 
+    name: "Copilot", 
+    developer: "Microsoft", 
+    category: "ai", 
+    rating: 4.5, 
+    downloads: "200M+", 
+    size: "Веб", 
+    icon: "CP",
+    iconUrl: "https://a5144d73-dc0c-47e4-af19-6ec502e91db2.selstorage.ru/optimized/dark/preview/copilot-color.webp", 
+    color: "#FFFFFF", 
+    isWeb: true,
+    webUrl: "https://copilot.microsoft.com",
+    desc: "ИИ-помощник от Microsoft для работы и творчества.",
+    installed: false 
+},
+{ 
+    id: 31, 
+    name: "Perplexity", 
+    developer: "Perplexity AI", 
+    category: "ai", 
+    rating: 4.8, 
+    downloads: "20M+", 
+    size: "Веб", 
+    icon: "P",
+    iconUrl: "https://a5144d73-dc0c-47e4-af19-6ec502e91db2.selstorage.ru/optimized/dark/preview/perplexity-color.webp", 
+    color: "#FFFFFF", 
+    isWeb: true,
+    webUrl: "https://perplexity.ai",
+    desc: "ИИ-поиск с источниками и ответами.",
+    installed: false 
+},
+{ 
+    id: 32, 
+    name: "Midjourney", 
+    developer: "Midjourney Inc", 
+    category: "ai", 
+    rating: 4.7, 
+    downloads: "5M+", 
+    size: "Веб", 
+    icon: "MJ",
+    iconUrl: "https://a5144d73-dc0c-47e4-af19-6ec502e91db2.selstorage.ru/optimized/dark/preview/midjourney.webp", 
+    color: "#000000", 
+    isWeb: true,
+    webUrl: "https://www.midjourney.com",
+    desc: "Генерация изображений по тексту.",
+    installed: false 
+},
+{ 
+    id: 33, 
+    name: "Grok", 
+    developer: "xAI", 
+    category: "ai", 
+    rating: 4.4, 
+    downloads: "10M+", 
+    size: "Веб", 
+    icon: "Gr",
+    iconUrl: "https://a5144d73-dc0c-47e4-af19-6ec502e91db2.selstorage.ru/optimized/dark/preview/grok.webp", 
+    color: "#000000", 
+    isWeb: true,
+    webUrl: "https://grok.x.ai",
+    desc: "ИИ от Илона Маска с доступом к X.",
+    installed: false 
+},
+{ 
+    id: 34, 
+    name: "Kimi", 
+    developer: "Kimi AI", 
+    category: "ai", 
+    rating: 4.6, 
+    downloads: "30M+", 
+    size: "Веб", 
+    icon: "K",
+    iconUrl: "https://a5144d73-dc0c-47e4-af19-6ec502e91db2.selstorage.ru/optimized/dark/preview/kimi-color.webp", 
+    color: "#000000", 
+    isWeb: true,
+    webUrl: "https://kimi.com",
+    desc: "Бесплатная генерация изображений.",
+    installed: false 
+},
+{ 
+    id: 35, 
+    name: "VK", 
+    developer: "VK LCC", 
+    category: "websites", 
+    rating: 4.4, 
+    downloads: "30M+", 
+    size: "Веб", 
+    icon: "VK",
+    iconUrl: "https://logo-teka.com/wp-content/uploads/2025/06/vk-logo.svg", 
+    color: "#FFFFFF", 
+    isWeb: true,
+    webUrl: "https://vk.com/",
+    desc: "Бесплатная генерация изображений.",
+    installed: false 
+},
+{ 
+    id: 36, 
+    name: "Rutube", 
+    developer: "RUTUBE", 
+    category: "websites", 
+    rating: 4.3, 
+    downloads: "30M+", 
+    size: "Веб", 
+    icon: "R",
+    iconUrl: "https://logo-teka.com/wp-content/uploads/2025/06/rutube-sign-logo.svg", 
+    color: "#FFFFFF", 
+    isWeb: true,
+    webUrl: "https://rutube.ru/",
+    desc: "Бесплатная генерация изображений.",
+    installed: false 
+},
+{ 
+    id: 37, 
+    name: "GigaChat", 
+    developer: "Sber", 
+    category: "ai", 
+    rating: 4.7, 
+    downloads: "30M+", 
+    size: "Веб", 
+    icon: "G",
+    iconUrl: "https://logo-teka.com/wp-content/uploads/2025/07/gigachat-sign-logo.svg", 
+    color: "#FFFFFF", 
+    isWeb: true,
+    webUrl: "https://giga.chat",
+    desc: "Бесплатная генерация изображений.",
+    installed: false 
+},
+{ 
+    id: 38, 
+    name: "Alica AI", 
+    developer: "Yandex", 
+    category: "ai", 
+    rating: 4.9, 
+    downloads: "20M+", 
+    size: "Веб", 
+    icon: "G",
+    iconUrl: "https://logo-teka.com/wp-content/uploads/2025/07/yandex-alisa-logo.svg", 
+    color: "#FFFFFF", 
+    isWeb: true,
+    webUrl: "https://alice.yandex.ru",
+    desc: "Бесплатная генерация изображений.",
+    installed: false 
+},
+{ 
+    id: 39, 
+    name: "Qwen", 
+    developer: "Alibaba", 
+    category: "ai", 
+    rating: 4.7, 
+    downloads: "20M+", 
+    size: "Веб", 
+    icon: "Q",
+    iconUrl: "https://a5144d73-dc0c-47e4-af19-6ec502e91db2.selstorage.ru/optimized/dark/preview/qwen-color.webp", 
+    color: "#FFFFFF", 
+    isWeb: true,
+    webUrl: "https://chat.qwen.ai",
+    desc: "Бесплатная генерация изображений.",
+    installed: false 
+},
+{
+    id: 40, 
+    name: "итд", 
+    developer: "nowkie", 
+    category: "websites", 
+    rating: 4.8, 
+    downloads: "10К+", 
+    size: "Веб", 
+    icon: "R",
+    iconUrl: "https://cdn.итд.com/images/d60ef4c7-b1b3-438b-84e5-4fb3dab5ef35.jpg", 
+    color: "#FFFFFF", 
+    isWeb: true,
+    webUrl: "https://итд.com/",
+    desc: "Бесплатная генерация изображений.",
+    installed: false 
+}	    	
         ];
+
+// НОВОЕ: Проверка реальной установки
+// НОВОЕ: Проверка реальной установки
+function checkAppStatus(app) {
+    console.log('checkAppStatus для', app.name);
+    
+    if (!app || !window.electronAPI) {
+        console.log('❌ Нет app или electronAPI');
+        return;
+    }
+    
+    console.log('📤 Отправляем запрос для:', app.name);
+    window.electronAPI.checkAppInstalled(app.name);
+    
+    window.electronAPI.onAppInstalledCheck((result) => {
+        console.log('📥 Получен результат для', app.name, ':', result);
+        
+        const appInList = apps.find(a => a.name === app.name);
+        if (appInList) {
+            appInList.reallyInstalled = result.installed;
+            appInList.installedExePath = result.exePath;
+            
+            console.log(`✅ Приложение ${app.name} установлено: ${result.installed}`);
+            
+            if (currentApp && currentApp.name === app.name) {
+                updateActionButtons();
+            }
+            renderApps();
+        }
+    });
+}
+
+// НОВОЕ: Проверка всех приложений при старте
+// НОВОЕ: Проверка всех приложений при старте
+function checkAllAppsStatus() {
+    console.log('🔍 checkAllAppsStatus вызван');
+    console.log('window.electronAPI есть?', !!window.electronAPI);
+    
+    if (!window.electronAPI) {
+        console.log('❌ electronAPI не найден! Проверьте preload.js');
+        return;
+    }
+    
+    console.log('📱 Всего приложений:', apps.length);
+    apps.forEach(app => {
+        console.log('   Проверяем:', app.name);
+        checkAppStatus(app);
+        if (app.fileName) {
+            window.electronAPI.checkFile(app.fileName);
+        }
+    });
+}
         
         let currentApp = null;
         let downloadInterval = null;
@@ -2148,24 +2622,24 @@ screenshots: ["https://store-images.s-microsoft.com/image/apps.33483.14473651905
         }
         
         function createAppCard(app, delay = 0) {
-            const hasIcon = app.iconUrl && !app.iconUrl.includes('wikipedia');
-            return `
-                <div class="app-card" onclick="showAppDetail(${app.id})" style="animation-delay: ${delay}s">
-                    <div class="app-icon-large" style="background: ${app.color}">
-                        ${hasIcon ? `<img src="${app.iconUrl}" alt="${app.name}" onerror="this.style.display='none'; this.parentElement.textContent='${app.icon}'">` : app.icon}
-                    </div>
-                    <div class="app-info">
-                        <h3>${app.name}</h3>
-                        <p>${app.developer}</p>
-                        <div class="app-meta">
-                            <span class="rating">${app.rating}</span>
-                            <span>• ${app.size}</span>
-                            ${app.installed ? '<span class="installed-badge">УСТАНОВЛЕНО</span>' : ''}
-                        </div>
-                    </div>
+    const hasIcon = app.iconUrl && !app.iconUrl.includes('wikipedia');
+    return `
+        <div class="app-card" onclick="${app.installed ? 'openInstalledApp(' + app.id + ')' : 'showAppDetail(' + app.id + ')'}" style="animation-delay: ${delay}s; --card-accent: ${app.color}50">
+            <div class="app-icon-large" style="background: ${app.color}">
+                ${hasIcon ? `<img src="${app.iconUrl}" alt="${app.name}" onerror="this.style.display='none'; this.parentElement.textContent='${app.icon}'">` : app.icon}
+            </div>
+            <div class="app-info">
+                <h3>${app.name}</h3>
+                <p>${app.developer}</p>
+                <div class="app-meta">
+                    <span class="rating">${app.rating}</span>
+                    <span>• ${app.size}</span>
+                    ${app.installed ? '<span class="installed-badge">УСТАНОВЛЕНО</span>' : ''}
                 </div>
-            `;
-        }
+            </div>
+        </div>
+    `;
+}
         
         function showHome() {
             currentView = 'home';
@@ -2223,13 +2697,15 @@ screenshots: ["https://store-images.s-microsoft.com/image/apps.33483.14473651905
             const filtered = apps.filter(app => app.category === category);
             const homeView = document.getElementById('homeView');
             
-            const titles = {
-                games: 'Игры',
-                reading: 'Чтение',
-                productivity: 'Продуктивность',
-                entertainment: 'Развлечения',
-                development: 'Разработка'
-            };
+		const titles = {
+		    games: 'Игры',
+		    reading: 'Чтение',
+		    productivity: 'Продуктивность',
+		    entertainment: 'Развлечения',
+		    development: 'Разработка',
+		    ai: 'Нейросети',        // ← добавь
+		    websites: 'Популярные сайты'  // ← добавь
+		};
             
             homeView.innerHTML = `
                 <div class="hero" style="margin-top: 20px;">
@@ -2249,130 +2725,206 @@ screenshots: ["https://store-images.s-microsoft.com/image/apps.33483.14473651905
             updateNav(category);
         }
         
-        function showAppDetail(id) {
-    currentApp = apps.find(a => a.id === id);
-    if (!currentApp) return;
+// === ИСПРАВЛЕННАЯ функция showAppDetail ===
+function showAppDetail(id) {
+  currentApp = apps.find(a => a.id === id);
+  if (!currentApp) return;
+  
+  // Если веб-приложение — сразу открываем сайт
+  if (currentApp.isWeb && currentApp.webUrl) {
+    window.open(currentApp.webUrl, '_blank');
+    return;
+  }
+  
+
+  // Внутри showAppDetail(), где загружается баннер:
+const bannerImg = document.getElementById('heroBannerImage');
+
+bannerImg.onload = () => {
+    bannerImg.classList.add('loaded');
+};
+
+bannerImg.src = currentApp.bannerUrl;
+  
+  // Скрываем/показываем нужные экраны
+  document.getElementById('homeView').classList.add('hidden');
+  document.getElementById('searchResults').classList.remove('active');
+  document.getElementById('appDetail').classList.add('active');
+  
+  // Сбрасываем состояние загрузки ПОЛНОСТЬЮ
+  resetDownloadState();
+  
+  // === БАННЕР ===
+  const fallbackGradient = document.getElementById('heroFallback');
+  
+  if (currentApp.bannerUrl) {
+    bannerImg.src = currentApp.bannerUrl;
+    bannerImg.style.display = 'block';
+    fallbackGradient.classList.remove('active');
     
-    resetDownloadState();
+    bannerImg.onerror = () => {
+      bannerImg.style.display = 'none';
+      fallbackGradient.classList.add('active');
+    };
+  } else {
+    bannerImg.style.display = 'none';
+    fallbackGradient.classList.add('active');
+  }
+  
+  
+  // === ИКОНКА ===
+  const detailIcon = document.getElementById('detailIcon');
+  const hasIcon = currentApp.iconUrl && !currentApp.iconUrl.includes('wikipedia');
+  
+  detailIcon.innerHTML = hasIcon ? 
+    `<img src="${currentApp.iconUrl}" alt="${currentApp.name}" onerror="this.style.display='none'; this.parentElement.innerHTML='<span>${currentApp.icon}</span>'">` : 
+    `<span>${currentApp.icon}</span>`;
+  detailIcon.style.background = currentApp.color;
+  
+  // === ИНФО ===
+  document.getElementById('detailTitle').textContent = currentApp.name;
+  document.getElementById('detailDeveloper').textContent = currentApp.developer;
+  document.getElementById('detailRating').textContent = currentApp.rating;
+  document.getElementById('detailDownloads').textContent = currentApp.downloads;
+  document.getElementById('detailSize').textContent = currentApp.size;
+  document.getElementById('detailDescription').textContent = currentApp.desc;
+  
+  // === СКРИНШОТЫ ===
+  const screenshotsSection = document.getElementById('screenshotsSection');
+  const screenshotsContainer = document.getElementById('screenshotsContainer');
+  
+  if (currentApp.screenshots && currentApp.screenshots.length > 0) {
+    screenshotsSection.style.display = 'block';
+    screenshotsContainer.innerHTML = currentApp.screenshots.map((url, index) => `
+      <div class="screenshot-item" onclick="openScreenshot('${url}')">
+        <img src="${url}" alt="Скриншот ${index + 1}" 
+             onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'>Скриншот ${index + 1}</div>'">
+        ${index === currentApp.screenshots.length - 1 && currentApp.videoUrl ? '<div class="video-badge">▶ Видео</div>' : ''}
+      </div>
+    `).join('');
+  } else {
+    screenshotsSection.style.display = 'none';
+  }
+  
+  // === КЛЮЧЕВОЕ: Сначала показываем кнопки по умолчанию, потом проверяем установку ===
+  updateActionButtons(); // Покажем начальное состояние
+  
+  // Проверяем реальную установку (асинхронно)
+  if (window.electronAPI) {
+    checkRealInstallation(currentApp);
     
-    document.getElementById('homeView').classList.add('hidden');
-    document.getElementById('searchResults').classList.remove('active');
-    document.getElementById('appDetail').classList.add('active');
-    
-    // === БАННЕР ===
-    const bannerImg = document.getElementById('heroBannerImage');
-    const fallbackGradient = document.getElementById('heroFallback');
-    
-    if (currentApp.bannerUrl) {
-        bannerImg.src = currentApp.bannerUrl;
-        bannerImg.style.display = 'block';
-        fallbackGradient.classList.remove('active');
-        
-        bannerImg.onerror = () => {
-            bannerImg.style.display = 'none';
-            fallbackGradient.classList.add('active');
-        };
-    } else {
-        bannerImg.style.display = 'none';
-        fallbackGradient.classList.add('active');
+    // Также проверяем наличие установщика
+    if (currentApp.fileName) {
+      window.electronAPI.checkFile(currentApp.fileName);
     }
-    
-    // === ИКОНКА ===
-    const detailIcon = document.getElementById('detailIcon');
-    const hasIcon = currentApp.iconUrl && !currentApp.iconUrl.includes('wikipedia');
-    
-    detailIcon.innerHTML = hasIcon ? 
-        `<img src="${currentApp.iconUrl}" alt="${currentApp.name}" onerror="this.style.display='none'; this.parentElement.innerHTML='<span>${currentApp.icon}</span>'">` : 
-        `<span>${currentApp.icon}</span>`;
-    detailIcon.style.background = currentApp.color;
-    
-    // === ИНФО ===
-    document.getElementById('detailTitle').textContent = currentApp.name;
-    document.getElementById('detailDeveloper').textContent = currentApp.developer;
-    document.getElementById('detailRating').textContent = currentApp.rating;
-    document.getElementById('detailDownloads').textContent = currentApp.downloads;
-    document.getElementById('detailSize').textContent = currentApp.size;
-    document.getElementById('detailDescription').textContent = currentApp.desc;
-    
-    // === СКРИНШОТЫ ===
-    const screenshotsSection = document.getElementById('screenshotsSection');
-    const screenshotsContainer = document.getElementById('screenshotsContainer');
-    
-    if (currentApp.screenshots && currentApp.screenshots.length > 0) {
-        screenshotsSection.style.display = 'block';
-        screenshotsContainer.innerHTML = currentApp.screenshots.map((url, index) => `
-            <div class="screenshot-item" onclick="openScreenshot('${url}')">
-                <img src="${url}" alt="Скриншот ${index + 1}" 
-                     onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'>Скриншот ${index + 1}</div>'">
-                ${index === currentApp.screenshots.length - 1 && currentApp.videoUrl ? '<div class="video-badge">▶ Видео</div>' : ''}
-            </div>
-        `).join('');
-    } else {
-        screenshotsSection.style.display = 'none';
-    }
-    
-    updateActionButtons();
-    document.getElementById('contentScroll').scrollTop = 0;
+  }
 }
 
-function openScreenshot(url) {
-    const modal = document.getElementById('screenshotModal');
-    const img = document.getElementById('modalImage');
-    img.src = url;
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
+// === ИСПРАВЛЕННАЯ функция checkRealInstallation ===
+function checkRealInstallation(app) {
+  if (!app || !window.electronAPI) return;
+  
+  console.log('🔍 Проверяем установку:', app.name);
+  
+  // Один разовый обработчик результата
+  const handleResult = (result) => {
+    // Убедимся что результат для текущего приложения
+    if (result.appName !== app.name) return;
+    
+    console.log('📥 Результат проверки:', app.name, result);
+    
+    // Обновляем данные приложения
+    const appInList = apps.find(a => a.name === app.name);
+    if (appInList) {
+      appInList.reallyInstalled = result.installed;
+      appInList.exePath = result.exePath;
+    }
+    
+    // Обновляем currentApp если это текущее
+    if (currentApp && currentApp.name === app.name) {
+      currentApp.reallyInstalled = result.installed;
+      currentApp.exePath = result.exePath;
+      
+      // ПЕРЕРИСОВЫВАЕМ КНОПКИ с новыми данными!
+      updateActionButtons();
+    }
+    
+    // Убираем обработчик чтобы не дублировался
+    window.electronAPI.removeAppInstalledCheckListener?.(handleResult);
+  };
+  
+  window.electronAPI.onAppInstalledCheck(handleResult);
+  window.electronAPI.checkAppInstalled(app.name);
 }
 
-function closeScreenshot(event) {
-    // Закрываем только если клик по фону или по крестику
-    if (event.target.id === 'screenshotModal' || event.target.classList.contains('close-btn')) {
-        const modal = document.getElementById('screenshotModal');
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-    }
+// === ИСПРАВЛЕННАЯ функция updateActionButtons ===
+function updateActionButtons() {
+  const downloadBtn = document.getElementById('downloadBtn');
+  const openBtn = document.getElementById('openBtn');
+  const deleteBtn = document.getElementById('deleteBtn');
+  const downloadContainer = document.getElementById('downloadContainer');
+  
+  if (!currentApp) return;
+  
+  // Сначала скрываем ВСЁ
+  downloadBtn.style.display = 'none';
+  openBtn.style.display = 'none';
+  deleteBtn.style.display = 'none';
+  downloadContainer.classList.remove('active'); // Важно: скрываем шкалу!
+  
+  console.log('🎛 Обновляем кнопки для:', currentApp.name);
+  console.log('   reallyInstalled:', currentApp.reallyInstalled);
+  console.log('   installed (есть файл):', currentApp.installed);
+  
+  // 1. ПРИОРИТЕТ: Приложение реально установлено на ПК → только "Открыть"
+  if (currentApp.reallyInstalled === true) {
+    console.log('✅ Показываем Открыть (реально установлено)');
+    openBtn.style.display = 'flex';
+    openBtn.innerHTML = '🚀 Открыть';
+    openBtn.onclick = openRealApp;
+    return; // Выходим — другие кнопки не нужны
+  }
+  
+  // 2. Есть установщик в загрузках → "Запустить установку" + "Удалить установщик"
+  if (currentApp.installed === true) {
+    console.log('📦 Показываем Запустить установку (есть файл)');
+    openBtn.style.display = 'flex';
+    openBtn.innerHTML = '📦 Запустить установку';
+    openBtn.onclick = runInstaller;
+    
+    deleteBtn.style.display = 'flex';
+    deleteBtn.innerHTML = '🗑 Удалить установщик';
+    return;
+  }
+  
+  // 3. Ничего нет → "Скачать и установить"
+  console.log('⬇️ Показываем Скачать');
+  downloadBtn.style.display = 'flex';
+  downloadBtn.innerHTML = '⬇️ Скачать и установить';
 }
-        
-        function resetDownloadState() {
-            // Сбрасываем все состояния загрузки
-            downloadProgress = 0;
-            isPaused = false;
+
+// === ИСПРАВЛЕННАЯ функция resetDownloadState ===
+function resetDownloadState() {
+  downloadProgress = 0;
+  isPaused = false;
+  
+  if (activeDownload) {
+    activeDownload.abort();
+    activeDownload = null;
+  }
+  clearInterval(downloadInterval);
+  
+  const downloadContainer = document.getElementById('downloadContainer');
+  const progressFill = document.getElementById('progressFill');
+  const downloadPercent = document.getElementById('downloadPercent');
+  const pauseBtn = document.getElementById('pauseBtn');
+  
+  if (downloadContainer) downloadContainer.classList.remove('active');
+  if (progressFill) progressFill.style.width = '0%';
+  if (downloadPercent) downloadPercent.textContent = '0%';
+  if (pauseBtn) pauseBtn.innerHTML = 'Пауза';
+}
             
-            // Отменяем активную загрузку если есть
-            if (activeDownload) {
-                activeDownload.abort();
-                activeDownload = null;
-            }
-            clearInterval(downloadInterval);
-            
-            const downloadContainer = document.getElementById('downloadContainer');
-            const downloadBtn = document.getElementById('downloadBtn');
-            const progressFill = document.getElementById('progressFill');
-            const downloadPercent = document.getElementById('downloadPercent');
-            const pauseBtn = document.getElementById('pauseBtn');
-            
-            if (downloadContainer) downloadContainer.classList.remove('active');
-            if (downloadBtn) downloadBtn.style.display = currentApp && currentApp.installed ? 'none' : 'flex';
-            if (progressFill) progressFill.style.width = '0%';
-            if (downloadPercent) downloadPercent.textContent = '0%';
-            if (pauseBtn) pauseBtn.innerHTML = 'Пауза';
-        }
-        
-        function updateActionButtons() {
-            const downloadBtn = document.getElementById('downloadBtn');
-            const openBtn = document.getElementById('openBtn');
-            const deleteBtn = document.getElementById('deleteBtn');
-            
-            if (currentApp.installed) {
-                downloadBtn.style.display = 'none';
-                openBtn.style.display = 'flex';
-                deleteBtn.style.display = 'flex';
-            } else {
-                downloadBtn.style.display = 'flex';
-                openBtn.style.display = 'none';
-                deleteBtn.style.display = 'none';
-            }
-        }
-        
         // Формируем URL для скачивания с GitHub Releases
 function getGitHubDownloadUrl(fileName) {
     return `https://github.com/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/releases/download/ws/${fileName}`;
@@ -2381,12 +2933,6 @@ function getGitHubDownloadUrl(fileName) {
         function getRawGitHubUrl(fileName) {
             return `https://raw.githubusercontent.com/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/${GITHUB_CONFIG.branch}/apps/${fileName}`;
         }
-        
-        async function startDownload() {
-    if (!currentApp || !currentApp.fileName) {
-        showToast('Ошибка', 'Файл не найден', '');
-        return;
-    }
     
     // Сбрасываем прогресс
     downloadProgress = 0;
@@ -2412,8 +2958,9 @@ function getGitHubDownloadUrl(fileName) {
     // Через 2 секунды считаем что загрузка началась
     setTimeout(() => {
         completeDownload();
+	checkAppStatus(currentApp);
     }, 2000);
-}
+
         
         // Имитация прогресса если размер файла неизвестен
         function simulateProgress() {
@@ -2474,16 +3021,67 @@ function getGitHubDownloadUrl(fileName) {
             }, 600);
         }
         
-        function openApp() {
-            // В реальности здесь был бы запуск установленного приложения
-            showToast('Приложение запущено', currentApp.name + ' открывается', '');
+        // ЗАМЕНИТЕ существующую функцию openApp на эту:
+function openApp() {
+    if (!currentApp) return;
+    
+    if (currentApp.reallyInstalled) {
+        showToast('Запуск', 'Запускаем ' + currentApp.name + '...', '🚀');
+        if (window.electronAPI) {
+            window.electronAPI.runApp(currentApp.name);
+            
+            window.electronAPI.onRunResult((result) => {
+                if (result.success) {
+                    showToast('Успешно', currentApp.name + ' запущен', '✅');
+                } else {
+                    showToast('Ошибка', 'Не удалось запустить', '❌');
+                }
+            });
         }
+    } else if (currentApp.installed) {
+        showToast('Установка', 'Запускаем установщик ' + currentApp.name + '...', '📦');
+        if (window.electronAPI) {
+            window.electronAPI.runInstaller(currentApp.fileName);
+        }
+    } else {
+        const siteMap = {
+            "YouTube": "https://youtube.com",
+            "Twitch": "https://twitch.tv",
+            "TikTok": "https://tiktok.com",
+            "Discord": "https://discord.com/app",
+            "Telegram": "https://web.telegram.org",
+            "Spotify": "https://open.spotify.com",
+            "Google Chrome": "https://google.com",
+            "Firefox": "https://mozilla.org",
+            "Roblox": "https://www.roblox.com/home",
+            "Steam": "https://store.steampowered.com",
+            "Epic Games Launcher": "https://store.epicgames.com",
+            "GIMP": "https://www.gimp.org",
+            "VS Code": "https://code.visualstudio.com",
+            "WinRar": "https://www.win-rar.com",
+            "Yandex Browser": "https://yandex.ru",
+            "Easy Launcher": "https://easylauncher.org",
+            "TLauncher": "https://tlauncher.org",
+            "SoundPad": "https://www.leppsoft.com/soundpad/",
+            "Lolka": "https://lolka.app",
+            "Radmin VPN": "https://www.radmin-vpn.com",
+            "AnyDesk": "https://anydesk.com"
+        };
+        
+        if (siteMap[currentApp.name] && window.electronAPI) {
+            window.electronAPI.openSite(currentApp.name, siteMap[currentApp.name]);
+        } else {
+            showToast('Недоступно', 'Веб-версия не найдена', '🌐');
+        }
+    }
+}
         
         function deleteApp() {
             if (confirm('Удалить ' + currentApp.name + '?')) {
                 currentApp.installed = false;
                 // Сбрасываем состояние загрузки при удалении
                 resetDownloadState();
+		checkAppStatus(currentApp);
                 updateActionButtons();
                 renderApps();
                 showToast('Приложение удалено', currentApp.name + ' удалено с устройства', '');
@@ -2550,10 +3148,17 @@ function updateThemeToggle() {
 function openSettings() {
     document.getElementById('settingsModal').classList.add('active');
     updateThemeToggle();
+    checkAccentColor(); // ← ДОБАВЬ СЮДА
 }
 
 function closeSettings() {
     document.getElementById('settingsModal').classList.remove('active');
+}
+
+function closeSettingsBackdrop(event) {
+    if (event.target === event.currentTarget) {
+        closeSettings();
+    }
 }
 
 // Закрытие по клику вне окна
@@ -2562,6 +3167,24 @@ document.getElementById('settingsModal').addEventListener('click', function(e) {
         closeSettings();
     }
 });
+
+function openInstalledApp(id) {
+    const app = apps.find(a => a.id === id);
+    if (!app) return;
+    
+    const siteMap = {
+        "YouTube": "https://youtube.com",
+        "Twitch": "https://twitch.tv",
+        "TikTok": "https://tiktok.com",
+        // добавьте остальные как в openApp
+    };
+    
+    if (siteMap[app.name] && window.electronAPI) {
+        window.electronAPI.openSite(app.name, siteMap[app.name]);
+    } else {
+        showAppDetail(id); // если нет сайта, показываем детали
+    }
+}
         
         function checkTheme() {
     const saved = localStorage.getItem('theme') || 'light';
@@ -2581,27 +3204,32 @@ document.getElementById('settingsModal').addEventListener('click', function(e) {
         }
         
         function showInstalled() {
-            currentView = 'installed';
-            const installed = apps.filter(app => app.installed);
-            const homeView = document.getElementById('homeView');
-            
-            homeView.innerHTML = `
-                <div class="hero" style="margin-top: 20px;">
-                    <div class="hero-content">
-                        <h1>Установленные приложения</h1>
-                        <p>Ваши приложения (${installed.length})</p>
-                    </div>
-                </div>
-                <div class="app-grid" style="margin-top: 32px;">
-                    ${installed.length ? installed.map((app, i) => createAppCard(app, i * 0.05)).join('') : '<p style="color: var(--text-secondary); font-size: 18px;">Нет установленных приложений</p>'}
-                </div>
-            `;
-            
-            homeView.classList.remove('hidden');
-            document.getElementById('appDetail').classList.remove('active');
-            document.getElementById('searchResults').classList.remove('active');
-            updateNav('installed');
-        }
+    currentView = 'installed';
+    
+    // Собираем приложения, которые либо:
+    // 1. Реально установлены в системе (reallyInstalled = true)
+    // 2. Или есть установщик (installed = true) для обратной совместимости
+    const installed = apps.filter(app => app.reallyInstalled === true || app.installed === true);
+    
+    const homeView = document.getElementById('homeView');
+    
+    homeView.innerHTML = `
+        <div class="hero" style="margin-top: 20px;">
+            <div class="hero-content">
+                <h1>Установленные приложения</h1>
+                <p>Ваши приложения (${installed.length})</p>
+            </div>
+        </div>
+        <div class="app-grid" style="margin-top: 32px;">
+            ${installed.length ? installed.map((app, i) => createAppCard(app, i * 0.05)).join('') : '<p style="color: var(--text-secondary); font-size: 18px;">Нет установленных приложений</p>'}
+        </div>
+    `;
+    
+    homeView.classList.remove('hidden');
+    document.getElementById('appDetail').classList.remove('active');
+    document.getElementById('searchResults').classList.remove('active');
+    updateNav('installed');
+}
         
         function showUpdates() {
             showToast('Обновления', 'Все приложения актуальны', '✓');
@@ -2695,20 +3323,425 @@ function handleGoogleResponse(response) {
     }
 }
 
-        </script>
+function setAccentColor(color, element) {
+    document.querySelectorAll('.color-option').forEach(el => el.classList.remove('active'));
+    element.classList.add('active');
     
-    <!-- Модальные окна -->
+    document.documentElement.style.setProperty('--accent', color);  // ← ИСПРАВЛЕНО: color!
+    
+    // Hover цвет (светлее)
+    const hoverColor = adjustColor(color, 20);
+    document.documentElement.style.setProperty('--accent-hover', hoverColor);
+    
+    // Свечение (40% прозрачность)
+    const r = parseInt(color.slice(1, 3), 16);
+    const g = parseInt(color.slice(3, 5), 16);
+    const b = parseInt(color.slice(5, 7), 16);
+    
+    document.documentElement.style.setProperty('--accent-glow', `rgba(${r}, ${g}, ${b}, 0.4)`);
+    document.documentElement.style.setProperty('--accent-glow-soft', `rgba(${r}, ${g}, ${b}, 0.15)`);
+    
+    localStorage.setItem('accentColor', color);
+    localStorage.setItem('accentHover', hoverColor);
+    localStorage.setItem('accentGlow', `rgba(${r}, ${g}, ${b}, 0.4)`);
+    localStorage.setItem('accentGlowSoft', `rgba(${r}, ${g}, ${b}, 0.15)`);
+    
+    showToast('Цвет изменен', 'Акцентный цвет обновлен', '🎨');
+}
+
+// Вспомогательная функция для осветления/затемнения
+function adjustColor(color, amount) {
+    const num = parseInt(color.replace('#', ''), 16);
+    const r = Math.min(255, Math.max(0, (num >> 16) + amount));
+    const g = Math.min(255, Math.max(0, ((num >> 8) & 0x00FF) + amount));
+    const b = Math.min(255, Math.max(0, (num & 0x0000FF) + amount));
+    return '#' + ((r << 16) | (g << 8) | b).toString(16).padStart(6, '0');
+}
+
+// Обнови checkAccentColor
+function checkAccentColor() {
+    const saved = localStorage.getItem('accentColor');
+    const savedHover = localStorage.getItem('accentHover');
+    const savedGlow = localStorage.getItem('accentGlow');
+    const savedGlowSoft = localStorage.getItem('accentGlowSoft');
+    
+    if (saved) {
+        // Устанавливаем CSS переменные
+        document.documentElement.style.setProperty('--accent', saved);
+        if (savedHover) document.documentElement.style.setProperty('--accent-hover', savedHover);
+        if (savedGlow) document.documentElement.style.setProperty('--accent-glow', savedGlow);
+        if (savedGlowSoft) document.documentElement.style.setProperty('--accent-glow-soft', savedGlowSoft);
+        
+        // Обновляем active у кнопки цвета
+        document.querySelectorAll('.color-option').forEach(el => {
+            // Убираем active у всех сначала
+            el.classList.remove('active');
+            // Добавляем active если цвет совпадает
+            if (el.getAttribute('onclick').includes(saved)) {
+                el.classList.add('active');
+            }
+        });
+    }
+}
+
+// При загрузке проверяем сохраненный цвет
+function checkAccentColor() {
+    const saved = localStorage.getItem('accentColor');
+    if (saved) {
+        document.documentElement.style.setProperty('--accent', saved);
+        // Обновляем active у кнопки
+        document.querySelectorAll('.color-option').forEach(el => {
+            if (el.style.background === saved || el.getAttribute('onclick').includes(saved)) {
+                el.classList.add('active');
+            } else {
+                el.classList.remove('active');
+            }
+        });
+    }
+}
+
+// Добавь вызов в DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+    renderApps();
+    checkTheme();
+    updateSiteModeUI();
+    checkAllAppsStatus();
+});
+
+// === НОВАЯ ЛОГИКА: Проверка реальной установки ===
+
+function checkRealInstallation(app) {
+  if (!app || !window.electronAPI) return;
+  
+  window.electronAPI.checkAppInstalled(app.name);
+  
+  window.electronAPI.onAppInstalledCheck((result) => {
+    if (result.appName === app.name) {
+      app.reallyInstalled = result.installed;
+      app.exePath = result.exePath;
+      
+      // Обновляем UI если это текущее приложение
+      if (currentApp && currentApp.id === app.id) {
+        updateActionButtons();
+      }
+    }
+  });
+}
+
+// === ОБНОВЛЁННАЯ функция updateActionButtons ===
+
+function updateActionButtons() {
+  const downloadBtn = document.getElementById('downloadBtn');
+  const openBtn = document.getElementById('openBtn');
+  const deleteBtn = document.getElementById('deleteBtn');
+  
+  if (!currentApp) return;
+  
+  // Сначала скрываем всё
+  downloadBtn.style.display = 'none';
+  openBtn.style.display = 'none';
+  deleteBtn.style.display = 'none';
+  
+  // 1. Приложение реально установлено на ПК → только "Открыть"
+  if (currentApp.reallyInstalled) {
+    openBtn.style.display = 'flex';
+    openBtn.innerHTML = 'Открыть';
+    openBtn.onclick = openRealApp;
+    return;
+  }
+  
+  // 2. Есть установщик в загрузках → "Запустить установку" + "Удалить установщик"
+  if (currentApp.installed) {
+    openBtn.style.display = 'flex';
+    openBtn.innerHTML = 'Запустить установку';
+    openBtn.onclick = runInstaller;
+    
+    deleteBtn.style.display = 'flex';
+    deleteBtn.innerHTML = '🗑 Удалить установщик';
+    return;
+  }
+  
+  // 3. Ничего нет → "Скачать и установить"
+  downloadBtn.style.display = 'flex';
+  downloadBtn.innerHTML = 'Скачать и установить';
+}
+
+// === НОВАЯ функция: Скачать и сразу запустить установку ===
+
+// === ИСПРАВЛЕННАЯ функция: сразу добавляем в установленные ===
+
+async function startDownloadAndInstall() {
+  if (!currentApp || !currentApp.fileName) {
+    showToast('Ошибка', 'Файл не найден');
+    return;
+  }
+  
+  const downloadUrl = getGitHubDownloadUrl(currentApp.fileName);
+  
+  // Показываем прогресс
+  document.getElementById('downloadContainer').classList.add('active');
+  document.getElementById('downloadBtn').style.display = 'none';
+  
+  // Скачиваем через iframe (без диалога)
+  const iframe = document.createElement('iframe');
+  iframe.style.display = 'none';
+  iframe.src = downloadUrl;
+  document.body.appendChild(iframe);
+  
+  simulateProgress();
+  
+  setTimeout(() => {
+    document.body.removeChild(iframe);
+    completeDownload();
+  }, 3000);
+}
+
+// === ИСПРАВЛЕННАЯ: сразу помечаем как установлено ===
+function completeDownload() {
+  clearInterval(downloadInterval);
+  downloadProgress = 100;
+  updateProgress();
+  
+  // ⭐ СРАЗУ помечаем как установлено (не ждём запуск!)
+  currentApp.installed = true;
+  
+  setTimeout(() => {
+    document.getElementById('downloadContainer').classList.remove('active');
+    updateActionButtons();
+    renderApps(); // Обновляем список
+    
+    showToast('Установлено!', currentApp.name + ' добавлен в библиотеку', '✅');
+    
+    // Запускаем установщик отдельно (не влияет на статус)
+    setTimeout(() => {
+      if (window.electronAPI) {
+        window.electronAPI.runInstaller(currentApp.fileName);
+      }
+    }, 500);
+    
+  }, 500);
+}
+
+// === ИСПРАВЛЕННЫЙ запуск (без двойного открытия) ===
+function openRealApp() {
+  if (!currentApp || !currentApp.reallyInstalled) return;
+  
+  showToast('Запуск', 'Открываем ' + currentApp.name + '...');
+  
+  if (window.electronAPI) {
+    // Убираем старые слушатели перед запуском
+    window.electronAPI.removeRunListeners?.();
+    
+    window.electronAPI.onRunResult((result) => {
+      if (result.success) {
+        showToast('Успешно', currentApp.name + ' запущен', '✅');
+      } else {
+        showToast('Ошибка запуска', result.error || 'Не удалось запустить', '❌');
+      }
+    });
+    
+    window.electronAPI.runApp(currentApp.name);
+  }
+}
+
+// === НОВАЯ функция: Запустить установщик ===
+
+function runInstaller() {
+  if (!currentApp || !currentApp.fileName) return;
+  
+  showToast('Запуск установщика', 'Установите ' + currentApp.name);
+  
+  if (window.electronAPI) {
+    window.electronAPI.runInstaller(currentApp.fileName);
+    
+    window.electronAPI.onRunResult((result) => {
+      if (result.success) {
+        // Проверяем реальную установку через 30 секунд
+        setTimeout(() => {
+          checkRealInstallation(currentApp);
+        }, 30000);
+      }
+    });
+  }
+}
+
+// === НАСТРОЙКА: Режим открытия сайтов ===
+
+const SITE_MODE_KEY = 'siteOpenMode';
+
+function getSiteMode() {
+    return localStorage.getItem(SITE_MODE_KEY) || 'internal'; // 'internal' или 'external'
+}
+
+function setSiteMode(mode) {
+    localStorage.setItem(SITE_MODE_KEY, mode);
+    updateSiteModeUI();
+    showToast('Настройки сохранены', mode === 'internal' ? 'Сайты открываются в WinStore' : 'Сайты открываются в браузере', '⚙️');
+}
+
+function toggleSiteMode() {
+    const current = getSiteMode();
+    const next = current === 'internal' ? 'external' : 'internal';
+    setSiteMode(next);
+}
+    
+    if (label) {
+        label.textContent = mode === 'external' ? 'Системном браузере' : 'Внутри WinStore';
+        if (mode === 'external') {
+            label.classList.add('external');
+        } else {
+            label.classList.remove('external');
+        }
+    }
+
+// === ИСПРАВЛЕННАЯ функция открытия сайтов ===
+
+function openSite(siteName, url) {
+    const mode = getSiteMode();
+    
+    if (mode === 'external') {
+        // Открываем в системном браузере
+        if (window.electronAPI && window.electronAPI.openExternal) {
+            window.electronAPI.openExternal(url);
+            showToast('Открытие...', `${siteName} в браузере`, '🌐');
+        } else {
+            // Fallback если electronAPI нет
+            window.open(url, '_blank');
+        }
+    } else {
+        // Открываем внутри WinStore
+        if (window.electronAPI && window.electronAPI.openSite) {
+            window.electronAPI.openSite(siteName, url);
+        } else {
+            window.open(url, '_blank');
+        }
+    }
+}
+
+// Плавный параллакс при скролле
+document.getElementById('contentScroll').addEventListener('scroll', (e) => {
+    const scrollTop = e.target.scrollTop;
+    const banner = document.querySelector('.app-hero-banner img');
+    if (banner && banner.classList.contains('loaded')) {
+        banner.style.transform = `scale(1.02) translateY(${scrollTop * 0.3}px)`;
+    }
+});
+
+// === ОБНОВЛЁННЫЕ вызовы ===
+
+/*
+if (currentApp.isWeb && currentApp.webUrl) {
+    openSite(currentApp.name, currentApp.webUrl);
+    return;
+}
+*/
+
+// В openInstalledApp:
+function openInstalledApp(id) {
+    const app = apps.find(a => a.id === id);
+    if (!app) return;
+    
+    const siteMap = {
+        "YouTube": "https://youtube.com",
+        "Twitch": "https://twitch.tv",
+        "TikTok": "https://tiktok.com",
+        "Discord": "https://discord.com/app",
+        "Telegram": "https://web.telegram.org",
+        "Spotify": "https://open.spotify.com",
+        "Google Chrome": "https://google.com",
+        "Firefox": "https://mozilla.org",
+        "Roblox": "https://www.roblox.com/home",
+        "Steam": "https://store.steampowered.com",
+        "Epic Games Launcher": "https://store.epicgames.com",
+        "GIMP": "https://www.gimp.org",
+        "VS Code": "https://code.visualstudio.com",
+        "WinRar": "https://www.win-rar.com",
+        "Yandex Browser": "https://yandex.ru",
+        "Easy Launcher": "https://easylauncher.org",
+        "TLauncher": "https://tlauncher.org",
+        "SoundPad": "https://www.leppsoft.com/soundpad/",
+        "Lolka": "https://lolka.app",
+        "Radmin VPN": "https://www.radmin-vpn.com",
+        "AnyDesk": "https://anydesk.com"
+    };
+    
+    if (siteMap[app.name]) {
+        openSite(app.name, siteMap[app.name]);
+    } else {
+        showAppDetail(id);
+    }
+}
+
+// Обновлённый openApp тоже использует openSite
+function openApp() {
+    if (!currentApp) return;
+    
+    if (currentApp.reallyInstalled) {
+        showToast('Запуск', 'Запускаем ' + currentApp.name + '...', '🚀');
+        if (window.electronAPI) {
+            window.electronAPI.runApp(currentApp.name);
+        }
+    } else if (currentApp.installed) {
+        showToast('Установка', 'Запускаем установщик...', '📦');
+        if (window.electronAPI) {
+            window.electronAPI.runInstaller(currentApp.fileName);
+        }
+    } else {
+        // Для неустановленных — открываем сайт через настройку
+        const siteMap = {
+            "YouTube": "https://youtube.com",
+            "Twitch": "https://twitch.tv",
+            "TikTok": "https://tiktok.com",
+            "Discord": "https://discord.com/app",
+            "Telegram": "https://web.telegram.org",
+            "Spotify": "https://open.spotify.com",
+            "Google Chrome": "https://google.com",
+            "Firefox": "https://mozilla.org",
+            "Roblox": "https://www.roblox.com/home",
+            "Steam": "https://store.steampowered.com",
+            "Epic Games Launcher": "https://store.epicgames.com",
+            "GIMP": "https://www.gimp.org",
+            "VS Code": "https://code.visualstudio.com",
+            "WinRar": "https://www.win-rar.com",
+            "Yandex Browser": "https://yandex.ru",
+            "Easy Launcher": "https://easylauncher.org",
+            "TLauncher": "https://tlauncher.org",
+            "SoundPad": "https://www.leppsoft.com/soundpad/",
+            "Lolka": "https://lolka.app",
+            "Radmin VPN": "https://www.radmin-vpn.com",
+            "AnyDesk": "https://anydesk.com"
+        };
+        
+        if (siteMap[currentApp.name]) {
+            openSite(currentApp.name, siteMap[currentApp.name]);
+        } else {
+            showToast('Недоступно', 'Веб-версия не найдена', '🌐');
+        }
+    }
+}
+
+    </script>
+    
+            </div>  <!-- content-scroll -->
+        </main>  <!-- main-content -->
+    </div>  <!-- app-container -->
+    
+    <!-- ========== МОДАЛЬНЫЕ ОКНА (только один раз!) ========== -->
+    
+    <!-- Модальное окно скриншотов -->
     <div class="screenshot-modal" id="screenshotModal" onclick="closeScreenshot(event)">
         <button class="close-btn" onclick="closeScreenshot(event)">×</button>
         <img src="" alt="Screenshot" id="modalImage">
     </div>
     
-    <div class="settings-modal" id="settingsModal">
-        <div class="settings-content">
+    <!-- Модальное окно настроек -->
+    <div class="settings-modal" id="settingsModal" onclick="closeSettingsBackdrop(event)">
+        <div class="settings-content" onclick="event.stopPropagation()">
             <div class="settings-header">
                 <h2>Настройки</h2>
-                <button class="close-btn" onclick="closeSettings()">×</button>
+                <button class="close-btn" onclick="closeSettings()"><span>×</span></button>
             </div>
+            
             <div class="settings-section">
                 <h3>Внешний вид</h3>
                 <div class="setting-item" onclick="toggleTheme()">
@@ -2718,36 +3751,46 @@ function handleGoogleResponse(response) {
                     </div>
                 </div>
             </div>
+
+            <div class="settings-section" style="margin-top: 24px;">
+    <h3>Поведение</h3>
+    <div class="setting-item" onclick="toggleSiteMode()" style="flex-direction: column; align-items: flex-start; gap: 12px;">
+        <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+            <span>Открывать сайты в</span>
+            <div class="toggle-switch" id="siteModeToggle">
+                <div class="toggle-knob"></div>
+            </div>
+        </div>
+        <div style="font-size: 13px; color: var(--text-secondary); font-weight: 500;" id="siteModeLabel">
+            Внутри WinStore
         </div>
     </div>
-
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js')
-                .then((reg) => console.log('SW registered', reg))
-                .catch((err) => console.log('SW error', err));
-        }
-    </script>
-</body>
-</html>
-<!-- Модальное окно настроек -->
-<div class="settings-modal" id="settingsModal">
-    <div class="settings-content">
-        <div class="settings-header">
-            <h2>Настройки</h2>
-            <button class="close-btn" onclick="closeSettings()">×</button>
-        </div>
-        
-        <div class="settings-section">
-            <h3>Внешний вид</h3>
-            <div class="setting-item" onclick="toggleTheme()">
-                <span>Темная тема</span>
-                <div class="toggle-switch" id="themeToggle">
-                    <div class="toggle-knob"></div>
+</div>
+            
+            <div class="settings-section" style="margin-top: 24px;">
+                <h3>Цвет акцента</h3>
+                <div class="color-picker">
+                    <div class="color-option active" style="background: #0071e3" onclick="setAccentColor('#0071e3', this)"></div>
+                    <div class="color-option" style="background: #5856d6" onclick="setAccentColor('#5856d6', this)"></div>
+                    <div class="color-option" style="background: #ff2d55" onclick="setAccentColor('#ff2d55', this)"></div>
+                    <div class="color-option" style="background: #34c759" onclick="setAccentColor('#34c759', this)"></div>
+                    <div class="color-option" style="background: #ff9500" onclick="setAccentColor('#ff9500', this)"></div>
+                    <div class="color-option" style="background: #af52de" onclick="setAccentColor('#af52de', this)"></div>
+                    <div class="color-option" style="background: #00c7be" onclick="setAccentColor('#00c7be', this)"></div>
+                    <div class="color-option" style="background: #ff3b30" onclick="setAccentColor('#ff3b30', this)"></div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    
+    <!-- Toast уведомление -->
+    <div class="toast" id="toast">
+        <div class="toast-icon">✓</div>
+        <div class="toast-content">
+            <h4 id="toastTitle">Успешно</h4>
+            <p id="toastMessage">Приложение установлено</p>
+        </div>
+    </div>
+
 </body>
 </html>
